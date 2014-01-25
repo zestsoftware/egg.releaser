@@ -24,6 +24,7 @@ setup(name='gitflow.releaser',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'zest.releaser',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
