@@ -27,7 +27,32 @@ setup(name='gitflow.releaser',
           'zest.releaser',
           # -*- Extra requirements: -*-
       ],
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
+      entry_points={
+          'console_scripts': [
+              # zest.releaser scripts
+              'release = gitflow.releaser.release:main',
+              'prerelease = gitflow.releaser.prerelease:main',
+              'postrelease = gitflow.releaser.postrelease:main',
+              'fullrelease = gitflow.releaser.fullrelease:main',
+              'longtest = gitflow.releaser.longtest:main',
+              'lasttagdiff = gitflow.releaser.lasttagdiff:main',
+              'lasttaglog = gitflow.releaser.lasttaglog:main',
+              ],
+          # The datachecks are implemented as entry points to be able to check
+          # our entry point implementation.
+          'gitflow.releaser.prereleaser.middle': [
+              'datacheck = gitflow.releaser.prerelease:datacheck',
+              ],
+          'gitflow.releaser.releaser.middle': [
+              'datacheck = gitflow.releaser.release:datacheck',
+              ],
+          'gitflow.releaser.postreleaser.middle': [
+              'datacheck = gitflow.releaser.postrelease:datacheck',
+              ],
+          # Documentation generation
+          'gitflow.releaser.prereleaser.before': [
+              'datacheck = gitflow.releaser.utils:prepare_documentation_entrypoint',
+              ],
+
+          },
       )
