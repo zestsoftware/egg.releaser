@@ -4,9 +4,9 @@ import logging
 
 from zest.releaser import postrelease
 
-from gitflow.releaser import choose
-from gitflow.releaser import utils
-from gitflow.releaser.utils import system
+from egg.releaser import choose
+from egg.releaser import utils
+from egg.releaser.utils import system
 
 logger = logging.getLogger(__name__)
 

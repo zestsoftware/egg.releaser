@@ -1,7 +1,7 @@
 import logging
 import os
 import sys
-from gitflow.releaser import git
+from egg.releaser import git
 from zest.releaser import hg
 from zest.releaser import bzr
 from zest.releaser import svn

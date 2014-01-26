@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.1'
+version = '1.2'
 
-setup(name='gitflow.releaser',
+setup(name='egg.releaser',
       version=version,
       description="",
       long_description=open("README.rst").read() + "\n" +
@@ -19,7 +19,7 @@ setup(name='gitflow.releaser',
       url='http://svn.plone.org/svn/collective/',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
-      namespace_packages=['gitflow'],
+      namespace_packages=['egg'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
@@ -33,11 +33,11 @@ setup(name='gitflow.releaser',
               'longtest = zest.releaser.longtest:main',
               'lasttagdiff = zest.releaser.lasttagdiff:main',
               'lasttaglog = zest.releaser.lasttaglog:main',
-              # gitflow scripts
-              'prerelease = gitflow.releaser.prerelease:main',
-              'release = gitflow.releaser.release:main',
-              'postrelease = gitflow.releaser.postrelease:main',
-              'fullrelease = gitflow.releaser.fullrelease:main',
+              # egg.releaser scripts
+              'prerelease = egg.releaser.prerelease:main',
+              'release = egg.releaser.release:main',
+              'postrelease = egg.releaser.postrelease:main',
+              'fullrelease = egg.releaser.fullrelease:main',
               ],
           # The datachecks are implemented as entry points to be able to check
           # our entry point implementation.
