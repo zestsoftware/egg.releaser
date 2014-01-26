@@ -4,10 +4,10 @@ import logging
 import os
 
 
-from gitflow.releaser import prerelease
-from gitflow.releaser import release
-from gitflow.releaser import postrelease
-from gitflow.releaser import utils
+from egg.releaser import prerelease
+from egg.releaser import release
+from egg.releaser import postrelease
+from egg.releaser import utils
 
 logger = logging.getLogger(__name__)
 

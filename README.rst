@@ -1,4 +1,4 @@
-gitflow.releaser
-================
+egg.releaser
+============
 
 Extending zest.releaser to use with git-flow
