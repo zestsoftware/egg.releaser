@@ -23,6 +23,21 @@ class Prereleaser(prerelease.Prereleaser):
         prerelease.Prereleaser.__init__(self)
         self.vcs = choose.version_control()
 
+    def execute(self):
+        """Make the changes and offer a commit"""
+        if utils.gitflow_check(self.vcs):
+            self._gitflow_release_start()
+        self._write_version()
+        self._write_history()
+        self._diff_and_commit()
+
+    def _gitflow_release_start(self):
+        logging.info('Location: ' + utils.system('pwd'))
+        cmd = self.vcs.cmd_gitflow_release_start(self.data['new_version'])
+        print cmd
+        if utils.ask("Run this command"):
+            print system(cmd)
+
 def main():
     utils.parse_options()
     logging.basicConfig(level=utils.loglevel(),

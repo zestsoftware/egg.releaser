@@ -3,6 +3,7 @@ import logging
 from zest.releaser import release
 from gitflow.releaser import choose
 from gitflow.releaser import utils
+from gitflow.releaser.utils import system
 
 
 class Releaser(release.Releaser):
@@ -14,11 +15,20 @@ class Releaser(release.Releaser):
 
     def execute(self):
         """Do the actual releasing"""
-        import pdb; pdb.set_trace()
-
-        self.vcs = choose.version_control()
-        self._make_tag()
+        logging.info('Location: ' + utils.system('pwd'))
+        if utils.gitflow_check(self.vcs):
+            self._gitflow_release_finish()
+        else:
+            self._make_tag()
         self._release()
+
+    def _gitflow_release_finish(self):
+        if self.data['tag_already_exists']:
+            return
+        cmd = self.vcs.cmd_gitflow_release_finish(self.data['version'])
+        print cmd
+        if utils.ask("Run this command"):
+            print system(cmd)
 
 def main(return_tagdir=False):
     utils.parse_options()
@@ -32,4 +42,4 @@ def main(return_tagdir=False):
     else:
         tagdir = releaser.data.get('tagdir')
         if tagdir:
-            logger.info("Reminder: tag checkout is in %s", tagdir)
+            logging.info("Reminder: tag checkout is in %s", tagdir)
