@@ -25,9 +25,9 @@ class Prereleaser(prerelease.Prereleaser):
 
     def execute(self):
         """Make the changes and offer a commit"""
-        self._write_version()
         if utils.gitflow_check(self.vcs):
             self._gitflow_release_start()
+        self._write_version()
         self._write_history()
         self._diff_and_commit()
 
