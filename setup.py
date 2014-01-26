@@ -30,28 +30,30 @@ setup(name='gitflow.releaser',
       entry_points={
           'console_scripts': [
               # zest.releaser scripts
-              'release = gitflow.releaser.release:main',
+              'longtest = zest.releaser.longtest:main',
+              'lasttagdiff = zest.releaser.lasttagdiff:main',
+              'lasttaglog = zest.releaser.lasttaglog:main',
+              # gitflow scripts
               'prerelease = gitflow.releaser.prerelease:main',
+              'release = gitflow.releaser.release:main',
               'postrelease = gitflow.releaser.postrelease:main',
               'fullrelease = gitflow.releaser.fullrelease:main',
-              'longtest = gitflow.releaser.longtest:main',
-              'lasttagdiff = gitflow.releaser.lasttagdiff:main',
-              'lasttaglog = gitflow.releaser.lasttaglog:main',
               ],
           # The datachecks are implemented as entry points to be able to check
           # our entry point implementation.
-          'gitflow.releaser.prereleaser.middle': [
-              'datacheck = gitflow.releaser.prerelease:datacheck',
+          'zest.releaser.prereleaser.middle': [
+              'datacheck = zest.releaser.prerelease:datacheck',
               ],
-          'gitflow.releaser.releaser.middle': [
-              'datacheck = gitflow.releaser.release:datacheck',
+          'zest.releaser.releaser.middle': [
+              'datacheck = zest.releaser.release:datacheck',
               ],
-          'gitflow.releaser.postreleaser.middle': [
-              'datacheck = gitflow.releaser.postrelease:datacheck',
+          'zest.releaser.postreleaser.middle': [
+              'datacheck = zest.releaser.postrelease:datacheck',
               ],
           # Documentation generation
-          'gitflow.releaser.prereleaser.before': [
-              'datacheck = gitflow.releaser.utils:prepare_documentation_entrypoint',
+          'zest.releaser.prereleaser.before': [
+              'datacheck = '
+                  'zest.releaser.utils:prepare_documentation_entrypoint',
               ],
 
           },
