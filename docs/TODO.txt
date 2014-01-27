@@ -1,4 +1,3 @@
 - Add tests.
-- Stop master from also getting 'Back to development ..' message.
 - Enhance automated history. zest.releaser seems to create more data through
 commit messages. Automatically logging features/hotfixes/support would be nice.
