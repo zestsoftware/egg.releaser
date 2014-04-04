@@ -1,11 +1,11 @@
 import logging
 
-from zest.releaser import git
+from zest.releaser.git import Git
 
 logger = logging.getLogger(__name__)
 
 
-class GitFlow(git.Git):
+class GitFlow(Git):
     """ Add command proxy for GitFlow to already existing git commands. """
     extension = 'gitflow'
 
