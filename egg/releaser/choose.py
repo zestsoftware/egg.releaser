@@ -5,7 +5,6 @@ from egg.releaser import git
 from zest.releaser import hg
 from zest.releaser import bzr
 from zest.releaser import svn
-from zest.releaser import choose
 
 try:
     from egg.releaser.utils import system as execute_command
