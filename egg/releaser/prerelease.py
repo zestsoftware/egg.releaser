@@ -7,7 +7,12 @@ from zest.releaser import prerelease
 
 from egg.releaser import utils
 from egg.releaser import choose
-from egg.releaser.utils import system
+
+try:
+    from egg.releaser.utils import execute_command
+except ImportError:
+    # Old version?
+    from egg.releaser.utils import system as execute_command
 
 logger = logging.getLogger(__name__)
 
@@ -32,11 +37,11 @@ class Prereleaser(prerelease.Prereleaser):
         self._diff_and_commit()
 
     def _gitflow_release_start(self):
-        logging.info('Location: ' + utils.system('pwd'))
+        logging.info('Location: ' + execute_command('pwd'))
         cmd = self.vcs.cmd_gitflow_release_start(self.data['new_version'])
         print cmd
         if utils.ask("Run this command"):
-            print system(cmd)
+            print execute_command(cmd)
 
 def main():
     utils.parse_options()
