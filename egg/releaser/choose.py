@@ -5,8 +5,12 @@ from egg.releaser import git
 from zest.releaser import hg
 from zest.releaser import bzr
 from zest.releaser import svn
-from zest.releaser import utils
 from zest.releaser import choose
+
+try:
+    from egg.releaser.utils import system as execute_command
+except ImportError:
+    from egg.releaser.utils import execute_command
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +33,7 @@ def version_control():
         return svn.Subversion()
     else:
         # Try finding an svn checkout *not* in the root.
-        last_try = utils.system("svn info")
+        last_try = execute_command("svn info")
         if 'Repository' in last_try:
             return svn.Subversion()
         logger.critical('No version control system detected.')

@@ -29,31 +29,11 @@ setup(name='egg.releaser',
       ],
       entry_points={
           'console_scripts': [
-              # zest.releaser scripts
-              'longtest = zest.releaser.longtest:main',
-              'lasttagdiff = zest.releaser.lasttagdiff:main',
-              'lasttaglog = zest.releaser.lasttaglog:main',
               # egg.releaser scripts
               'prerelease = egg.releaser.prerelease:main',
               'release = egg.releaser.release:main',
               'postrelease = egg.releaser.postrelease:main',
               'fullrelease = egg.releaser.fullrelease:main',
-              ],
-          # The datachecks are implemented as entry points to be able to check
-          # our entry point implementation.
-          'zest.releaser.prereleaser.middle': [
-              'datacheck = zest.releaser.prerelease:datacheck',
-              ],
-          'zest.releaser.releaser.middle': [
-              'datacheck = zest.releaser.release:datacheck',
-              ],
-          'zest.releaser.postreleaser.middle': [
-              'datacheck = zest.releaser.postrelease:datacheck',
-              ],
-          # Documentation generation
-          'zest.releaser.prereleaser.before': [
-              'datacheck = '
-                  'zest.releaser.utils:prepare_documentation_entrypoint',
               ],
 
           },

@@ -6,7 +6,6 @@ from zest.releaser import postrelease
 
 from egg.releaser import choose
 from egg.releaser import utils
-from egg.releaser.utils import system
 
 logger = logging.getLogger(__name__)
 
