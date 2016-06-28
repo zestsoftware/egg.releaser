@@ -1,4 +1,4 @@
-"""Do the checks and tasks that have to happen before doing a release.
+""" Do the checks and tasks that have to happen before doing a release.
 """
 
 import logging
@@ -18,10 +18,9 @@ logger = logging.getLogger(__name__)
 
 
 class Prereleaser(prerelease.Prereleaser):
-    """Prepare release, ready for making a tag and an sdist.
+    """ Prepare release, ready for making a tag and an sdist.
 
-    self.data holds data that can optionally be changed by plugins.
-
+        self.data holds data that can optionally be changed by plugins.
     """
 
     def __init__(self):

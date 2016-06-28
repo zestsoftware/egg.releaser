@@ -6,7 +6,9 @@ logger = logging.getLogger(__name__)
 
 
 class GitFlow(Git):
-    """ Add command proxy for GitFlow to already existing git commands. """
+    """ Add command proxy for GitFlow to already existing git commands.
+    """
+
     extension = 'gitflow'
 
     def cmd_create_tag(self, version, base=''):

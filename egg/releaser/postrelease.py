@@ -10,10 +10,10 @@ from egg.releaser import utils
 logger = logging.getLogger(__name__)
 
 class Postreleaser(postrelease.Postreleaser):
-    """Post-release tasks like resetting version number.
 
-    self.data holds data that can optionally be changed by plugins.
+    """ Post-release tasks like resetting version number.
 
+        self.data holds data that can optionally be changed by plugins.
     """
 
     def __init__(self):

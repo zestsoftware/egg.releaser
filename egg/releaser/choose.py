@@ -15,8 +15,9 @@ logger = logging.getLogger(__name__)
 
 
 def version_control():
-    """Return an object that provides the version control interface based
-    on the detected version control system."""
+    """ Return an object that provides the version control interface based
+        on the detected version control system.
+    """
     curdir_contents = os.listdir('.')
     # prefer git over all and everything over svn
     if '.git' in curdir_contents:

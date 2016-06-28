@@ -12,14 +12,16 @@ except ImportError:
 
 
 class Releaser(release.Releaser):
-    """Release the project by tagging it and optionally uploading to pypi."""
+    """ Release the project by tagging it and optionally uploading to pypi.
+    """
 
     def __init__(self):
         release.Releaser.__init__(self)
         self.vcs = choose.version_control()
 
     def execute(self):
-        """Do the actual releasing"""
+        """ Do the actual releasing.
+        """
         logging.info('Location: ' + execute_command('pwd'))
         if utils.gitflow_check(self.vcs):
             self._gitflow_release_finish()
