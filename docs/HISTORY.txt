@@ -1,6 +1,26 @@
 Changelog
 =========
 
+1.6 (unreleased)
+----------------
+
+- 'feature/CMAAS-27' [Thijs]:
+  - Enhance original (OG) Git class instead of creating
+    a new GitFlow
+  - Have _push push to both develop and master branches
+    from the gitflow settings
+  - Check gitflow based on ./.git/config
+  - Refactor choose to re-use as much of
+    zest.releaser.choose as possible
+  - Updated docstring formatting
+  - Remove unused imports
+- 'feature/CMAAS-26' [THijs]:
+  - Handle system() changing to execute_command()
+  - Only supply the entry points that override
+    zest.releaser, the rest gets built by it's
+    respective packages.
+
+
 1.5 (2014-04-04)
 ----------------
 
