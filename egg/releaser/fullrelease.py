@@ -1,4 +1,4 @@
-"""Do the prerelease, actual release and post release in one fell swoop!
+""" Do the prerelease, actual release and post release in one fell swoop!
 """
 import logging
 import os
