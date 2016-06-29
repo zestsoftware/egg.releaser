@@ -1,6 +1,7 @@
 import logging
 import ConfigParser
 import io
+import sys
 
 from zest.releaser.git import Git as OGGit
 
@@ -55,9 +56,51 @@ class Git(OGGit):
 
     def gitflow_branches(self):
         config = self._config()
-        return [
-            config.get('gitflow "branch"', branch)
-            for branch in ['develop', 'master']]
+        return dict(config.items('gitflow "branch"'))
+
+    def gitflow_get_branch(self, branch):
+        branches = self.gitflow_branches()
+        if branch in branches:
+            return branches.get(branch)
+        else:
+            logger.critical(
+                '"%s" is not a valid gitflow branch.' % branch)
+            sys.exit(1)
+
+    def gitflow_prefixes(self):
+        config = self._config()
+        return dict(config.items('gitflow "prefix"'))
+
+    def gitflow_get_prefix(self, prefix):
+        prefixes = self.gitflow_prefixes()
+        if prefix in prefixes:
+            return prefixes.get(prefix)
+        else:
+            logger.critical(
+                '"%s" is not a valid gitflow prefix.' % prefix)
+            sys.exit(1)
+
+    def gitflow_check_prefix(self, prefix):
+        prefix = self.gitflow_get_prefix(prefix)
+        current = self.current_branch()
+        return current.startswith(prefix)
+
+    def gitflow_check_branch(self, branch, switch=False):
+        branch = self.gitflow_get_branch(branch)
+        current = self.current_branch()
+        if current != branch:
+            if switch:
+                self.gitflow_switch_to_branch(branch, silent=False)
+            else:
+                logger.critical(
+                    'You are not on the "%s" branch.' % branch)
+                sys.exit(1)
+
+    def gitflow_switch_to_branch(self, branch, silent=True):
+        if not silent:
+            logger.info(
+                'You are not on the "%s" branch, switching now.' % branch)
+        self.cmd_checkout_from_tag(branch, '.')
 
     def current_branch(self):
         return execute_command("git rev-parse --abbrev-ref HEAD").strip()

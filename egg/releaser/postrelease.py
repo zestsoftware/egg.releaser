@@ -21,6 +21,17 @@ class Postreleaser(BasereleaseMixin, postrelease.Postreleaser):
         postrelease.Postreleaser.__init__(self)
         self.vcs = choose.version_control()
 
+    def execute(self):
+        """ Make the changes and offer a commit.
+        """
+        if utils.has_extension(self.vcs, 'gitflow'):
+            self.vcs.gitflow_check_branch("develop", switch=True)
+        self._write_version()
+        self._change_header(add=True)
+        self._write_history()
+        self._diff_and_commit()
+        self._push()
+
 
 def main():
     utils.parse_options()
