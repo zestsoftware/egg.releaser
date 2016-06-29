@@ -23,7 +23,7 @@ class Releaser(release.Releaser):
         """ Do the actual releasing.
         """
         logging.info('Location: ' + execute_command('pwd'))
-        if utils.gitflow_check(self.vcs):
+        if utils.has_extension(self.vcs, 'gitflow'):
             self._gitflow_release_finish()
         else:
             self._make_tag()

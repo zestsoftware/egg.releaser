@@ -1,4 +1,6 @@
 import logging
+import ConfigParser
+import io
 
 from zest.releaser.git import Git
 
@@ -8,8 +10,6 @@ logger = logging.getLogger(__name__)
 class GitFlow(Git):
     """ Add command proxy for GitFlow to already existing git commands.
     """
-
-    extension = 'gitflow'
 
     def cmd_create_tag(self, version, base=''):
         msg = "Release-%s" % version
@@ -29,3 +29,17 @@ class GitFlow(Git):
 
     def cmd_gitflow_hotfix_finish(self, version):
         return "git flow hotfix finish %s" % version
+
+    def _config():
+        """ Parse the git config into a ConfigParser object.
+        """
+        config = open('./.git/config', 'r').read().replace('\t', '')
+        config = config.replace('\t', '')  # ConfigParser doesn't like tabs
+        parser = ConfigParser.ConfigParser()
+        parser.readfp(io.BytesIO(config))
+        return parser
+
+    @property
+    def extensions(self):
+        config = self._config()
+        return ['gitflow'] if 'gitflow "branch"' in config.sections() else []
