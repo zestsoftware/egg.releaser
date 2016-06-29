@@ -30,7 +30,7 @@ class Git(OGGit):
     def cmd_gitflow_hotfix_finish(self, version):
         return "git flow hotfix finish %s" % version
 
-    def _config():
+    def _config(self):
         """ Parse the git config into a ConfigParser object.
         """
         config = open('./.git/config', 'r').read().replace('\t', '')
