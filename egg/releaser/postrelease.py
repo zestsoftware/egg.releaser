@@ -1,14 +1,10 @@
 """ Do the checks and tasks that have to happen after doing a release.
 """
-import logging
-
 from zest.releaser import postrelease
 
 from egg.releaser import utils
 from egg.releaser.choose import version_control
 from egg.releaser.baserelease import BasereleaseMixin
-
-logger = logging.getLogger(__name__)
 
 
 class Postreleaser(BasereleaseMixin, postrelease.Postreleaser):
