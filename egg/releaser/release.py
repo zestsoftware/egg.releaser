@@ -57,14 +57,9 @@ class Releaser(release.Releaser):
 
 def main(return_tagdir=False):
     utils.parse_options()
-    logging.basicConfig(level=utils.loglevel(),
-                        format="%(levelname)s: %(message)s")
+    utils.configure_logging()
     releaser = Releaser()
     releaser.run()
-    if return_tagdir:
-        # At the end, for the benefit of fullrelease.
-        return releaser.data.get('tagdir')
-    else:
-        tagdir = releaser.data.get('tagdir')
-        if tagdir:
-            logging.info("Reminder: tag checkout is in %s", tagdir)
+    tagdir = releaser.data.get('tagdir')
+    if tagdir:
+        logger.info("Reminder: tag checkout is in %s", tagdir)
