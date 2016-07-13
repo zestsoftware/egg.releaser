@@ -25,17 +25,17 @@ class Releaser(release.Releaser):
     def execute(self):
         """ Do the actual releasing.
         """
-        logging.info('Location: ' + execute_command('pwd'))
+        logger.info('Location: ' + execute_command('pwd'))
         if utils.has_extension(self.vcs, 'gitflow'):
             if self.vcs.gitflow_check_prefix("release"):
                 self._gitflow_release_finish()
                 current = self.vcs.current_branch()
-                logging.info(
+                logger.info(
                     ('Switching from ' + current +
                      ' to master branch for egg generation.'))
                 self.vcs.gitflow_check_branch("master", switch=True)
                 self._release()
-                logging.info('Switching to back to ' + current + ' branch.')
+                logger.info('Switching to back to ' + current + ' branch.')
                 self.vcs.gitflow_switch_to_branch(current)
             else:
                 logger.critical(
