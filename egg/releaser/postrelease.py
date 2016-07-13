@@ -4,8 +4,8 @@ import logging
 
 from zest.releaser import postrelease
 
-from egg.releaser import choose
 from egg.releaser import utils
+from egg.releaser.choose import version_control
 from egg.releaser.baserelease import BasereleaseMixin
 
 logger = logging.getLogger(__name__)
@@ -19,7 +19,7 @@ class Postreleaser(BasereleaseMixin, postrelease.Postreleaser):
 
     def __init__(self):
         postrelease.Postreleaser.__init__(self)
-        self.vcs = choose.version_control()
+        self.vcs = version_control()
 
     def execute(self):
         """ Make the changes and offer a commit.
