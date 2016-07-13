@@ -2,6 +2,7 @@ import logging
 import ConfigParser
 import io
 import sys
+import utils
 
 from zest.releaser.git import Git as OGGit
 

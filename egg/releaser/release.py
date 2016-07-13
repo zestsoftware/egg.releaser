@@ -1,9 +1,9 @@
 import logging
 import sys
+import utils
 
 from zest.releaser import release
 from egg.releaser import choose
-from egg.releaser import utils
 
 try:
     from egg.releaser.utils import execute_command

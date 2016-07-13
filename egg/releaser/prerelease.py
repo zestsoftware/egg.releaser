@@ -2,10 +2,10 @@
 """
 
 import logging
+import utils
 
 from zest.releaser import prerelease
 
-from egg.releaser import utils
 from egg.releaser import choose
 
 try:

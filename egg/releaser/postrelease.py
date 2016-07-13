@@ -1,13 +1,12 @@
 """ Do the checks and tasks that have to happen after doing a release.
 """
+import utils
+
+from egg.releaser.choose import version_control
 from zest.releaser import postrelease
 
-from egg.releaser import utils
-from egg.releaser.choose import version_control
-from egg.releaser.baserelease import BasereleaseMixin
 
-
-class Postreleaser(BasereleaseMixin, postrelease.Postreleaser):
+class Postreleaser(utils.BasereleaseMixin, postrelease.Postreleaser):
     """ Post-release tasks like resetting version number.
 
         self.data holds data that can optionally be changed by plugins.

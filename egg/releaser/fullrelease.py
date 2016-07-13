@@ -1,13 +1,13 @@
 """ Do the prerelease, actual release and post release in one fell swoop!
 """
+
 import logging
 import os
 
-
-from egg.releaser import prerelease
-from egg.releaser import release
-from egg.releaser import postrelease
-from egg.releaser import utils
+import prerelease
+import release
+import postrelease
+import utils
 
 logger = logging.getLogger(__name__)
 
