@@ -104,3 +104,10 @@ class Git(OGGit):
 
     def current_branch(self):
         return execute_command("git rev-parse --abbrev-ref HEAD").strip()
+
+
+def enhance_with_gitflow(vcs):
+    """ Return the vcs determined by the original function, unless we are
+        dealing with git, in which case we return our gitflow enhanced Git().
+    """
+    return Git() if isinstance(vcs, OGGit) else vcs
