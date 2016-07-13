@@ -32,6 +32,7 @@ class Prereleaser(prerelease.Prereleaser):
         """
         if utils.has_extension(self.vcs, 'gitflow'):
             self._gitflow_release_start()
+        self._change_header()
         self._write_version()
         self._write_history()
         self._diff_and_commit()
