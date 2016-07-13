@@ -3,7 +3,6 @@ import sys
 import utils
 
 from zest.releaser import release
-from egg.releaser import choose
 
 logger = logging.getLogger(__name__)
 
@@ -12,9 +11,9 @@ class Releaser(release.Releaser):
     """ Release the project by tagging it and optionally uploading to pypi.
     """
 
-    def __init__(self):
-        release.Releaser.__init__(self)
-        self.vcs = choose.version_control()
+    def __init__(self, vcs=None):
+        vcs = utils.prepare_vcs(vcs)
+        release.Releaser.__init__(self, vcs=vcs)
 
     def execute(self):
         """ Do the actual releasing.

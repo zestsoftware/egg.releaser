@@ -6,8 +6,6 @@ import utils
 
 from zest.releaser import prerelease
 
-from egg.releaser import choose
-
 logger = logging.getLogger(__name__)
 
 
@@ -17,9 +15,9 @@ class Prereleaser(prerelease.Prereleaser):
         self.data holds data that can optionally be changed by plugins.
     """
 
-    def __init__(self):
-        prerelease.Prereleaser.__init__(self)
-        self.vcs = choose.version_control()
+    def __init__(self, vcs=None):
+        vcs = utils.prepare_vcs(vcs)
+        prerelease.Prereleaser.__init__(self, vcs=vcs)
 
     def _gitflow_release_start(self):
         logger.info('Location: ' + utils.execute_command('pwd'))

@@ -2,7 +2,6 @@
 """
 import utils
 
-from egg.releaser.choose import version_control
 from zest.releaser import postrelease
 
 
@@ -12,9 +11,9 @@ class Postreleaser(utils.BasereleaseMixin, postrelease.Postreleaser):
         self.data holds data that can optionally be changed by plugins.
     """
 
-    def __init__(self):
-        postrelease.Postreleaser.__init__(self)
-        self.vcs = version_control()
+    def __init__(self, vcs=None):
+        vcs = utils.prepare_vcs(vcs)
+        postrelease.Postreleaser.__init__(self, vcs=vcs)
 
     def execute(self):
         """ Make the changes and offer a commit.
