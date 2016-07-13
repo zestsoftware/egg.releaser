@@ -100,7 +100,7 @@ class Git(OGGit):
         if not silent:
             logger.info(
                 'You are not on the "%s" branch, switching now.' % branch)
-        self.cmd_checkout_from_tag(branch, '.')
+        execute_command(self.cmd_checkout_from_tag(branch, '.'))
 
     def current_branch(self):
         return execute_command("git rev-parse --abbrev-ref HEAD").strip()
