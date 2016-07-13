@@ -12,7 +12,10 @@ Changelog
 
 - General improvements and corrections:
   * Update the main() functions to current zest.releaser equivalents
+  * Update the __init__() functions to current zest.releaser equivalents
   * Use logger, not logging
+  * Handle execute_comand complexity in one place
+  * Reduce the amount of unnecessary modules
   * Some tidying and formatting
   [THijs]
 
