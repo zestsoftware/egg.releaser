@@ -5,12 +5,6 @@ import utils
 from zest.releaser import release
 from egg.releaser import choose
 
-try:
-    from egg.releaser.utils import execute_command
-except ImportError:
-    # Old version?
-    from egg.releaser.utils import system as execute_command
-
 logger = logging.getLogger(__name__)
 
 
@@ -25,7 +19,7 @@ class Releaser(release.Releaser):
     def execute(self):
         """ Do the actual releasing.
         """
-        logger.info('Location: ' + execute_command('pwd'))
+        logger.info('Location: ' + utils.execute_command('pwd'))
         if utils.has_extension(self.vcs, 'gitflow'):
             if self.vcs.gitflow_check_prefix("release"):
                 self._gitflow_release_finish()
@@ -52,7 +46,7 @@ class Releaser(release.Releaser):
         cmd = self.vcs.cmd_gitflow_release_finish(self.data['version'])
         print cmd
         if utils.ask("Run this command"):
-            print execute_command(cmd)
+            print utils.execute_command(cmd)
 
 
 def main(return_tagdir=False):

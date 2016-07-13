@@ -1,4 +1,13 @@
 # Have all the zest releaser utils, plus additions and overrides
+try:
+    # Older zest.releaser.utils have system to fulfill the execute_command
+    # function. First try importing this.
+    from zest.releaser.utils import system as execute_command
+except ImportError:
+    # No more system, we are dealing with a newer version
+    pass
+# Now import everything. If execute_command is present in utils, it will
+# override the previous 'import as'.
 from zest.releaser.utils import *
 
 

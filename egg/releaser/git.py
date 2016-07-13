@@ -6,12 +6,6 @@ import utils
 
 from zest.releaser.git import Git as OGGit
 
-try:
-    from egg.releaser.utils import execute_command
-except ImportError:
-    # Old version?
-    from egg.releaser.utils import system as execute_command
-
 logger = logging.getLogger(__name__)
 
 
@@ -101,10 +95,10 @@ class Git(OGGit):
         if not silent:
             logger.info(
                 'You are not on the "%s" branch, switching now.' % branch)
-        execute_command(self.cmd_checkout_from_tag(branch, '.'))
+        utils.execute_command(self.cmd_checkout_from_tag(branch, '.'))
 
     def current_branch(self):
-        return execute_command("git rev-parse --abbrev-ref HEAD").strip()
+        return utils.execute_command("git rev-parse --abbrev-ref HEAD").strip()
 
 
 def enhance_with_gitflow(vcs):
