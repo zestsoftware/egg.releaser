@@ -52,7 +52,7 @@ class Git(OGGit):
             _finish_cmd = 'git flow release finish -m "%s" %s' % (msg, version)
             return '; '.join([_start_cmd, _finish_cmd])
         else:
-            super(OGGit, self).cmd_create_tag(self, version)
+            super(OGGit, self).cmd_create_tag(version)
 
     def gitflow_branches(self):
         config = self._config()
