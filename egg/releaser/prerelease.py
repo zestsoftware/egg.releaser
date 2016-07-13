@@ -2,17 +2,9 @@
 """
 
 import logging
+import utils
 
 from zest.releaser import prerelease
-
-from egg.releaser import utils
-from egg.releaser import choose
-
-try:
-    from egg.releaser.utils import execute_command
-except ImportError:
-    # Old version?
-    from egg.releaser.utils import system as execute_command
 
 logger = logging.getLogger(__name__)
 
@@ -23,29 +15,31 @@ class Prereleaser(prerelease.Prereleaser):
         self.data holds data that can optionally be changed by plugins.
     """
 
-    def __init__(self):
-        prerelease.Prereleaser.__init__(self)
-        self.vcs = choose.version_control()
-
-    def execute(self):
-        """Make the changes and offer a commit"""
-        if utils.has_extension(self.vcs, 'gitflow'):
-            self._gitflow_release_start()
-        self._write_version()
-        self._write_history()
-        self._diff_and_commit()
+    def __init__(self, vcs=None):
+        vcs = utils.prepare_vcs(vcs)
+        prerelease.Prereleaser.__init__(self, vcs=vcs)
 
     def _gitflow_release_start(self):
-        logging.info('Location: ' + execute_command('pwd'))
+        logger.info('Location: ' + utils.execute_command('pwd'))
         self.vcs.gitflow_check_branch("develop", switch=True)
         cmd = self.vcs.cmd_gitflow_release_start(self.data['new_version'])
         print cmd
         if utils.ask("Run this command"):
-            print execute_command(cmd)
+            print utils.execute_command(cmd)
+
+    def execute(self):
+        """ Make the changes and offer a commit.
+        """
+        if utils.has_extension(self.vcs, 'gitflow'):
+            self._gitflow_release_start()
+        self._change_header()
+        self._write_version()
+        self._write_history()
+        self._diff_and_commit()
+
 
 def main():
     utils.parse_options()
-    logging.basicConfig(level=utils.loglevel(),
-                        format="%(levelname)s: %(message)s")
+    utils.configure_logging()
     prereleaser = Prereleaser()
     prereleaser.run()

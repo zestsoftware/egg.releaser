@@ -1,25 +1,19 @@
 """ Do the checks and tasks that have to happen after doing a release.
 """
-import logging
+import utils
 
 from zest.releaser import postrelease
 
-from egg.releaser import choose
-from egg.releaser import utils
-from egg.releaser.baserelease import BasereleaseMixin
 
-logger = logging.getLogger(__name__)
-
-
-class Postreleaser(BasereleaseMixin, postrelease.Postreleaser):
+class Postreleaser(utils.BasereleaseMixin, postrelease.Postreleaser):
     """ Post-release tasks like resetting version number.
 
         self.data holds data that can optionally be changed by plugins.
     """
 
-    def __init__(self):
-        postrelease.Postreleaser.__init__(self)
-        self.vcs = choose.version_control()
+    def __init__(self, vcs=None):
+        vcs = utils.prepare_vcs(vcs)
+        postrelease.Postreleaser.__init__(self, vcs=vcs)
 
     def execute(self):
         """ Make the changes and offer a commit.
@@ -35,7 +29,6 @@ class Postreleaser(BasereleaseMixin, postrelease.Postreleaser):
 
 def main():
     utils.parse_options()
-    logging.basicConfig(level=utils.loglevel(),
-                        format="%(levelname)s: %(message)s")
+    utils.configure_logging()
     postreleaser = Postreleaser()
     postreleaser.run()

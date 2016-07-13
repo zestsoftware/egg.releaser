@@ -1,30 +1,34 @@
 """ Do the prerelease, actual release and post release in one fell swoop!
 """
+
 import logging
 import os
 
-
-from egg.releaser import prerelease
-from egg.releaser import release
-from egg.releaser import postrelease
-from egg.releaser import utils
+import prerelease
+import release
+import postrelease
+import utils
 
 logger = logging.getLogger(__name__)
 
 
 def main():
     utils.parse_options()
-    logging.basicConfig(level=utils.loglevel(),
-                        format="%(levelname)s: %(message)s")
+    utils.configure_logging()
     logger.info('Starting prerelease.')
     original_dir = os.getcwd()
-    prerelease.main()
-    os.chdir(original_dir)
+    # prerelease
+    prereleaser = prerelease.Prereleaser()
+    prereleaser.run()
     logger.info('Starting release.')
-    tagdir = release.main(return_tagdir=True)
-    os.chdir(original_dir)
+    # release
+    releaser = release.Releaser(vcs=prereleaser.vcs)
+    releaser.run()
+    tagdir = releaser.data.get('tagdir')
     logger.info('Starting postrelease.')
-    postrelease.main()
+    # postrelease
+    postreleaser = postrelease.Postreleaser(vcs=releaser.vcs)
+    postreleaser.run()
     os.chdir(original_dir)
     logger.info('Finished full release.')
     if tagdir:

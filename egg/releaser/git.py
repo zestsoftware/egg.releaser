@@ -2,14 +2,9 @@ import logging
 import ConfigParser
 import io
 import sys
+import utils
 
 from zest.releaser.git import Git as OGGit
-
-try:
-    from egg.releaser.utils import execute_command
-except ImportError:
-    # Old version?
-    from egg.releaser.utils import system as execute_command
 
 logger = logging.getLogger(__name__)
 
@@ -52,7 +47,7 @@ class Git(OGGit):
             _finish_cmd = 'git flow release finish -m "%s" %s' % (msg, version)
             return '; '.join([_start_cmd, _finish_cmd])
         else:
-            super(OGGit, self).cmd_create_tag(self, version)
+            super(OGGit, self).cmd_create_tag(version)
 
     def gitflow_branches(self):
         config = self._config()
@@ -100,7 +95,14 @@ class Git(OGGit):
         if not silent:
             logger.info(
                 'You are not on the "%s" branch, switching now.' % branch)
-        self.cmd_checkout_from_tag(branch, '.')
+        utils.execute_command(self.cmd_checkout_from_tag(branch, '.'))
 
     def current_branch(self):
-        return execute_command("git rev-parse --abbrev-ref HEAD").strip()
+        return utils.execute_command("git rev-parse --abbrev-ref HEAD").strip()
+
+
+def enhance_with_gitflow(vcs):
+    """ Return the vcs determined by the original function, unless we are
+        dealing with git, in which case we return our gitflow enhanced Git().
+    """
+    return Git() if isinstance(vcs, OGGit) else vcs
