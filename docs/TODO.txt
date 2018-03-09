@@ -1,3 +1,0 @@
-- Add tests.
-- Enhance automated history. zest.releaser seems to create more data through
-commit messages. Automatically logging features/hotfixes/support would be nice.

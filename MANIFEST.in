@@ -1,4 +1,3 @@
 graft egg
-graft docs
 include *.rst
 global-exclude *.pyc
