@@ -8,18 +8,21 @@ version = '1.8.dev0'
 
 setup(name='egg.releaser',
       version=version,
-      description="",
+      description="zest.releaser wrapper for use with git flow",
       long_description=open("README.rst").read() + "\n" +
       open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
-      # http://pypi.python.org/pypi?:action=list_classifiers
+      # https://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
+          "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
           "Programming Language :: Python",
+          "Programming Language :: Python :: 2",
+          "Programming Language :: Python :: 2.7",
       ],
-      keywords='',
-      author='',
-      author_email='',
-      url='http://svn.plone.org/svn/collective/',
+      keywords='release git flow',
+      author='Maurits van Rees',
+      author_email='m.van.rees@zestsoftware.nl',
+      url='https://github.com/zestsoftware/egg.releaser',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['egg'],
