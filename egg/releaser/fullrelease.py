@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """ Do the prerelease, actual release and post release in one fell swoop!
 """
 from __future__ import unicode_literals
