@@ -24,8 +24,7 @@ setup(name='egg.releaser',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'zest.releaser',
-          # -*- Extra requirements: -*-
+          'zest.releaser >= 4.0',
       ],
       entry_points={
           'console_scripts': [

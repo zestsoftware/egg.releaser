@@ -4,7 +4,7 @@ Changelog
 1.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Require zest.releaser 4.0 as minimum, for ``execute_comand``.  [maurits]
 
 
 1.7 (2016-07-13)
