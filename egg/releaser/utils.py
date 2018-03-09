@@ -47,13 +47,13 @@ class BasereleaseMixin(object):
         push_cmds = self.vcs.push_commands()
         if not push_cmds:
             return
-        if ask("OK to push commits to the server?"):
+        if ask('OK to push commits to the server?'):
             if has_extension(self.vcs, 'gitflow'):
                 # Push both develop and master branches. First push master,
                 # then develop, because that is the branch we want to end on.
                 for branch in [
-                        self.vcs.gitflow_get_branch("master"),
-                        self.vcs.gitflow_get_branch("develop")]:
+                        self.vcs.gitflow_get_branch('master'),
+                        self.vcs.gitflow_get_branch('develop')]:
                     if branch != self.vcs.current_branch():
                         self.vcs.gitflow_switch_to_branch(branch)
 

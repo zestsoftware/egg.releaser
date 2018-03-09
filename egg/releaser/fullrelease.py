@@ -32,4 +32,4 @@ def main():
     os.chdir(original_dir)
     logger.info('Finished full release.')
     if tagdir:
-        logger.info("Reminder: tag checkout is in %s", tagdir)
+        logger.info('Reminder: tag checkout is in %s', tagdir)

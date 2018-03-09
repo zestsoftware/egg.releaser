@@ -21,20 +21,20 @@ class Releaser(release.Releaser):
         """
         logger.info('Location: ' + utils.execute_command('pwd'))
         if utils.has_extension(self.vcs, 'gitflow'):
-            if self.vcs.gitflow_check_prefix("release"):
+            if self.vcs.gitflow_check_prefix('release'):
                 self._gitflow_release_finish()
                 current = self.vcs.current_branch()
                 logger.info(
                     ('Switching from ' + current +
                      ' to master branch for egg generation.'))
-                self.vcs.gitflow_check_branch("master", switch=True)
+                self.vcs.gitflow_check_branch('master', switch=True)
                 self._release()
                 logger.info('Switching to back to ' + current + ' branch.')
                 self.vcs.gitflow_switch_to_branch(current)
             else:
                 logger.critical(
-                    "You are not on a release branch, first run a prerelease "
-                    "or gitflow release.")
+                    'You are not on a release branch, first run a prerelease '
+                    'or gitflow release.')
                 sys.exit(1)
         else:
             self._make_tag()
@@ -45,7 +45,7 @@ class Releaser(release.Releaser):
             return
         cmd = self.vcs.cmd_gitflow_release_finish(self.data['version'])
         print(cmd)
-        if utils.ask("Run this command"):
+        if utils.ask('Run this command'):
             print(utils.execute_command(cmd))
 
 
@@ -56,4 +56,4 @@ def main(return_tagdir=False):
     releaser.run()
     tagdir = releaser.data.get('tagdir')
     if tagdir:
-        logger.info("Reminder: tag checkout is in %s", tagdir)
+        logger.info('Reminder: tag checkout is in %s', tagdir)

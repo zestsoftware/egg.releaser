@@ -19,7 +19,7 @@ class Postreleaser(utils.BasereleaseMixin, postrelease.Postreleaser):
         """ Make the changes and offer a commit.
         """
         if utils.has_extension(self.vcs, 'gitflow'):
-            self.vcs.gitflow_check_branch("develop", switch=True)
+            self.vcs.gitflow_check_branch('develop', switch=True)
         self._write_version()
         self._change_header(add=True)
         self._write_history()
