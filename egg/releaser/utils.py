@@ -1,8 +1,11 @@
-
 from git import enhance_with_gitflow
 from zest.releaser.choose import version_control
-from zest.releaser.utils import ask
-from zest.releaser.utils import execute_command
+
+from zest.releaser.utils import ask  # noqa
+from zest.releaser.utils import execute_command  # noqa
+# Import * from upstream, so other modules can import everythin
+# from our utils module and don't need to know where it comes from.
+from zest.releaser.utils import *  # noqa
 
 import logging
 
