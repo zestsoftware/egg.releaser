@@ -24,7 +24,7 @@ class Prereleaser(prerelease.Prereleaser):
         super(Prereleaser, self).__init__(vcs=vcs)
 
     def _gitflow_release_start(self):
-        logger.info('Location: ' + utils.execute_command('pwd'))
+        logger.info('Location: ' + utils.execute_command(['pwd']))
         self.vcs.gitflow_check_branch('develop', switch=True)
         cmd = self.vcs.cmd_gitflow_release_start(self.data['new_version'])
         print(cmd)

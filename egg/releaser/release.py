@@ -23,7 +23,7 @@ class Releaser(release.Releaser):
     def execute(self):
         """ Do the actual releasing.
         """
-        logger.info('Location: ' + utils.execute_command('pwd'))
+        logger.info('Location: ' + utils.execute_command(['pwd']))
         if not has_extension(self.vcs, 'gitflow'):
             super(Releaser, self).execute()
         if not self.vcs.gitflow_check_prefix('release'):
