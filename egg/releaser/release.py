@@ -26,6 +26,7 @@ class Releaser(release.Releaser):
         logger.info('Location: ' + utils.execute_command(['pwd']))
         if not has_extension(self.vcs, 'gitflow'):
             super(Releaser, self).execute()
+            return
         if not self.vcs.gitflow_check_prefix('release'):
             logger.critical(
                 'You are not on a release branch, first run a prerelease '
