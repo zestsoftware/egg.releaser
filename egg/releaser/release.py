@@ -1,8 +1,9 @@
+from zest.releaser import release
+
 import logging
 import sys
 import utils
 
-from zest.releaser import release
 
 logger = logging.getLogger(__name__)
 

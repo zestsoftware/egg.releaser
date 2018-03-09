@@ -1,10 +1,11 @@
-import logging
+from zest.releaser.git import Git as OGGit
+
 import ConfigParser
 import io
+import logging
 import sys
 import utils
 
-from zest.releaser.git import Git as OGGit
 
 logger = logging.getLogger(__name__)
 

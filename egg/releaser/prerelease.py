@@ -1,10 +1,11 @@
 """ Do the checks and tasks that have to happen before doing a release.
 """
 
+from zest.releaser import prerelease
+
 import logging
 import utils
 
-from zest.releaser import prerelease
 
 logger = logging.getLogger(__name__)
 

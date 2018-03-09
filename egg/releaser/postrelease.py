@@ -1,8 +1,8 @@
 """ Do the checks and tasks that have to happen after doing a release.
 """
-import utils
-
 from zest.releaser import postrelease
+
+import utils
 
 
 class Postreleaser(utils.BasereleaseMixin, postrelease.Postreleaser):

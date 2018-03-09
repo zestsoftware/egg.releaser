@@ -3,11 +3,11 @@
 
 import logging
 import os
-
+import postrelease
 import prerelease
 import release
-import postrelease
 import utils
+
 
 logger = logging.getLogger(__name__)
 
