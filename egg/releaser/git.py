@@ -35,7 +35,7 @@ class Git(OGGit):
         config = open('./.git/config', 'r').read().replace('\t', '')
         config = config.replace('\t', '')  # ConfigParser doesn't like tabs
         parser = ConfigParser.ConfigParser()
-        parser.readfp(io.BytesIO(config))
+        parser.readfp(io.StringIO(config))
         return parser
 
     @property
