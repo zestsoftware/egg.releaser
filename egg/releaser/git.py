@@ -43,11 +43,12 @@ class Git(OGGit):
         config = self._config()
         return ['gitflow'] if 'gitflow "branch"' in config.sections() else []
 
-    def cmd_create_tag(self, version, base=''):
+    def cmd_create_tag(self, version, message, sign=False):
         if 'gitflow' not in self.extensions:
-            return super(OGGit, self).cmd_create_tag(version)
+            return super(Git, self).cmd_create_tag(
+                version, message, sign=sign)
         msg = 'Release-{}'.format(version)
-        _start_cmd = 'git flow release start {} {}'.format(version, base)
+        _start_cmd = 'git flow release start {} {}'.format(version, message)
         _finish_cmd = 'git flow release finish -m "{}" {}'.format(
             msg, version)
         return [_start_cmd, _finish_cmd]
