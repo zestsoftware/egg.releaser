@@ -4,7 +4,7 @@
 from zest.releaser import prerelease
 
 import logging
-import utils
+from . import utils
 
 
 logger = logging.getLogger(__name__)
@@ -18,7 +18,7 @@ class Prereleaser(prerelease.Prereleaser):
 
     def __init__(self, vcs=None):
         vcs = utils.prepare_vcs(vcs)
-        prerelease.Prereleaser.__init__(self, vcs=vcs)
+        super(Prereleaser, self).__init__(vcs=vcs)
 
     def _gitflow_release_start(self):
         logger.info('Location: ' + utils.execute_command('pwd'))
@@ -33,10 +33,7 @@ class Prereleaser(prerelease.Prereleaser):
         """
         if utils.has_extension(self.vcs, 'gitflow'):
             self._gitflow_release_start()
-        self._change_header()
-        self._write_version()
-        self._write_history()
-        self._diff_and_commit()
+        super(Prereleaser, self).execute()
 
 
 def main():

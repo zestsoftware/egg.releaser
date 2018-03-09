@@ -6,7 +6,7 @@ import os
 import postrelease
 import prerelease
 import release
-import utils
+from . import utils
 
 
 logger = logging.getLogger(__name__)

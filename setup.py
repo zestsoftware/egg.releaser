@@ -29,7 +29,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'setuptools',
-        'zest.releaser >= 4.0',
+        'zest.releaser >= 6.13.1',
     ],
     entry_points={
         'console_scripts': [
