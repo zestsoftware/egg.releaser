@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from egg.releaser.utils import has_extension
+from egg.releaser.utils import prepare_vcs
 from zest.releaser import release
+from zest.releaser import utils
 
 import logging
 import sys
-from . import utils
 
 
 logger = logging.getLogger(__name__)
@@ -15,14 +17,14 @@ class Releaser(release.Releaser):
     """
 
     def __init__(self, vcs=None):
-        vcs = utils.prepare_vcs(vcs)
+        vcs = prepare_vcs(vcs)
         super(Releaser, self).__init__(vcs=vcs)
 
     def execute(self):
         """ Do the actual releasing.
         """
         logger.info('Location: ' + utils.execute_command('pwd'))
-        if not utils.has_extension(self.vcs, 'gitflow'):
+        if not has_extension(self.vcs, 'gitflow'):
             super(Releaser, self).execute()
         if not self.vcs.gitflow_check_prefix('release'):
             logger.critical(

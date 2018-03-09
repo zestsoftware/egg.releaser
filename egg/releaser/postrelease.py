@@ -2,8 +2,10 @@
 """ Do the checks and tasks that have to happen after doing a release.
 """
 from __future__ import unicode_literals
+from egg.releaser.utils import has_extension
+from egg.releaser.utils import prepare_vcs
 from zest.releaser import postrelease
-from . import utils
+from zest.releaser import utils
 
 import logging
 
@@ -11,27 +13,27 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class Postreleaser(utils.BasereleaseMixin, postrelease.Postreleaser):
+class Postreleaser(postrelease.Postreleaser):
     """ Post-release tasks like resetting version number.
 
     self.data holds data that can optionally be changed by plugins.
     """
 
     def __init__(self, vcs=None):
-        vcs = utils.prepare_vcs(vcs)
+        vcs = prepare_vcs(vcs)
         postrelease.Postreleaser.__init__(self, vcs=vcs)
 
     def execute(self):
         """ Make the changes and offer a commit.
         """
-        if utils.has_extension(self.vcs, 'gitflow'):
+        if has_extension(self.vcs, 'gitflow'):
             self.vcs.gitflow_check_branch('develop', switch=True)
         super(Postreleaser, self).execute()
 
     def _push(self):
         """ Offer to push changes, if needed.
         """
-        if not utils.has_extension(self.vcs, 'gitflow'):
+        if not has_extension(self.vcs, 'gitflow'):
             return super(Postreleaser, self)._push()
         push_cmds = self.vcs.push_commands()
         if not push_cmds:

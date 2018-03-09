@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from zest.releaser import utils
 from zest.releaser.git import Git as OGGit
 
 import ConfigParser
 import io
 import logging
 import sys
-from . import utils
 
 
 logger = logging.getLogger(__name__)

@@ -2,10 +2,12 @@
 """ Do the checks and tasks that have to happen before doing a release.
 """
 from __future__ import unicode_literals
+from egg.releaser.utils import has_extension
+from egg.releaser.utils import prepare_vcs
 from zest.releaser import prerelease
+from zest.releaser import utils
 
 import logging
-from . import utils
 
 
 logger = logging.getLogger(__name__)
@@ -18,7 +20,7 @@ class Prereleaser(prerelease.Prereleaser):
     """
 
     def __init__(self, vcs=None):
-        vcs = utils.prepare_vcs(vcs)
+        vcs = prepare_vcs(vcs)
         super(Prereleaser, self).__init__(vcs=vcs)
 
     def _gitflow_release_start(self):
@@ -32,7 +34,7 @@ class Prereleaser(prerelease.Prereleaser):
     def execute(self):
         """ Make the changes and offer a commit.
         """
-        if utils.has_extension(self.vcs, 'gitflow'):
+        if has_extension(self.vcs, 'gitflow'):
             self._gitflow_release_start()
         super(Prereleaser, self).execute()
 

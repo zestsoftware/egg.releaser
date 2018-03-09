@@ -3,10 +3,6 @@ from __future__ import unicode_literals
 from git import enhance_with_gitflow
 from zest.releaser.choose import version_control
 
-# Import * from upstream, so other modules can import everything
-# from our utils module and don't need to know where it comes from.
-from zest.releaser.utils import *  # noqa
-
 import logging
 
 
