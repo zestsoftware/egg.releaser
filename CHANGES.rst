@@ -4,7 +4,7 @@ Changelog
 1.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Require zest.releaser 4.0 as minimum, for ``execute_comand``.  [maurits]
 
 
 1.7 (2016-07-13)
@@ -30,6 +30,7 @@ Changelog
 ----------------
 
 - 'feature/CMAAS-27':
+
   * Enhance original (OG) Git class instead of creating
     a new GitFlow
   * Have _push push to both develop and master branches
@@ -39,13 +40,16 @@ Changelog
     zest.releaser.choose as possible
   * Updated docstring formatting
   * Remove unused imports
+
   [THijs]
 
 - 'feature/CMAAS-26':
+
   * Handle system() changing to execute_command()
   * Only supply the entry points that override
     zest.releaser, the rest gets built by it's
     respective packages.
+
   [THijs]
 
 

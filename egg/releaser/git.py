@@ -1,10 +1,11 @@
-import logging
+from zest.releaser.git import Git as OGGit
+
 import ConfigParser
 import io
+import logging
 import sys
 import utils
 
-from zest.releaser.git import Git as OGGit
 
 logger = logging.getLogger(__name__)
 
@@ -21,10 +22,10 @@ class Git(OGGit):
                                                                version)
 
     def cmd_gitflow_hotfix_start(self, version, basename=''):
-        return "git flow hotfix start %s %s" % (version, basename)
+        return 'git flow hotfix start %s %s' % (version, basename)
 
     def cmd_gitflow_hotfix_finish(self, version):
-        return "git flow hotfix finish %s" % version
+        return 'git flow hotfix finish %s' % version
 
     def _config(self):
         """ Parse the git config into a ConfigParser object.
@@ -42,7 +43,7 @@ class Git(OGGit):
 
     def cmd_create_tag(self, version, base=''):
         if 'gitflow' in self.extensions:
-            msg = "Release-%s" % version
+            msg = 'Release-%s' % version
             _start_cmd = 'git flow release start %s %s' % (version, base)
             _finish_cmd = 'git flow release finish -m "%s" %s' % (msg, version)
             return '; '.join([_start_cmd, _finish_cmd])
@@ -98,7 +99,7 @@ class Git(OGGit):
         utils.execute_command(self.cmd_checkout_from_tag(branch, '.'))
 
     def current_branch(self):
-        return utils.execute_command("git rev-parse --abbrev-ref HEAD").strip()
+        return utils.execute_command('git rev-parse --abbrev-ref HEAD').strip()
 
 
 def enhance_with_gitflow(vcs):

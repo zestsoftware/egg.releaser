@@ -1,4 +1,4 @@
-recursive-include egg *
-recursive-include docs *
-include *
+graft egg
+include *.rst
+include LICENSE.GPL
 global-exclude *.pyc

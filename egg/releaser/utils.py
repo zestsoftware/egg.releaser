@@ -1,19 +1,11 @@
+
+from git import enhance_with_gitflow
+from zest.releaser.choose import version_control
+from zest.releaser.utils import ask
+from zest.releaser.utils import execute_command
+
 import logging
 
-# Have all the zest releaser utils, plus additions and overrides
-from git import enhance_with_gitflow
-
-from zest.releaser.choose import version_control
-try:
-    # Older zest.releaser.utils have system to fulfill the execute_command
-    # function. First try importing this.
-    from zest.releaser.utils import system as execute_command
-except ImportError:
-    # No more system, we are dealing with a newer version
-    pass
-# Now import everything. If execute_command is present in utils, it will
-# override the previous 'import as'.
-from zest.releaser.utils import *
 
 logger = logging.getLogger(__name__)
 
@@ -55,13 +47,13 @@ class BasereleaseMixin(object):
         push_cmds = self.vcs.push_commands()
         if not push_cmds:
             return
-        if ask("OK to push commits to the server?"):
+        if ask('OK to push commits to the server?'):
             if has_extension(self.vcs, 'gitflow'):
                 # Push both develop and master branches. First push master,
                 # then develop, because that is the branch we want to end on.
                 for branch in [
-                        self.vcs.gitflow_get_branch("master"),
-                        self.vcs.gitflow_get_branch("develop")]:
+                        self.vcs.gitflow_get_branch('master'),
+                        self.vcs.gitflow_get_branch('develop')]:
                     if branch != self.vcs.current_branch():
                         self.vcs.gitflow_switch_to_branch(branch)
 
