@@ -7,12 +7,12 @@ setup(name='egg.releaser',
       version=version,
       description="",
       long_description=open("README.rst").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
-        "Programming Language :: Python",
-        ],
+          "Programming Language :: Python",
+      ],
       keywords='',
       author='',
       author_email='',
@@ -34,7 +34,7 @@ setup(name='egg.releaser',
               'release = egg.releaser.release:main',
               'postrelease = egg.releaser.postrelease:main',
               'fullrelease = egg.releaser.fullrelease:main',
-              ],
+          ],
 
-          },
+      },
       )
