@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from git import enhance_with_gitflow
 from zest.releaser.choose import version_control
 

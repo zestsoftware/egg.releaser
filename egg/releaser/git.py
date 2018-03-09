@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from zest.releaser.git import Git as OGGit
 
 import ConfigParser
