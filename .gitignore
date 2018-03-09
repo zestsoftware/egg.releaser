@@ -1,0 +1,12 @@
+*.egg
+*.egg-info
+*.eggs
+*.pyc
+*.pyo
+bin/
+build/
+dist/
+include/
+lib/
+man/
+pip-selfcheck.json
