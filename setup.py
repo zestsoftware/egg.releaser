@@ -1,16 +1,15 @@
 from setuptools import find_packages
 from setuptools import setup
 
-import os
 
 version = '1.8.dev0'
+text = open("README.rst").read() + "\n" + open("CHANGES.rst").read()
 
 setup(
     name='egg.releaser',
     version=version,
     description="zest.releaser wrapper for use with git flow",
-    long_description=open("README.rst").read() + "\n" +
-                     open(os.path.join("docs", "HISTORY.txt")).read(),
+    long_description=text,
     # Get more strings from
     # https://pypi.python.org/pypi?:action=list_classifiers
     classifiers=[
