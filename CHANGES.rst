@@ -4,6 +4,15 @@ Changelog
 1.8 (unreleased)
 ----------------
 
+- Support calling an extra script after asking to upload to PyPI.
+  The script will be called with the tag checkout as working dir,
+  and it will get ``dist/*`` as argument.  We get the script from
+  the environment variable ``AFTER_UPLOAD_SCRIPT``.  You can avoid
+  calling this by not doing the tag checkout, or by having a
+  ``setup.cfg`` with ``[zest.releaser] release = no``.
+  Or simply answer 'No' when we ask if you want to run the command.
+  [maurits]
+
 - Cleanup and adapt code to work with latest zest.releaser (6.13.1 minimum).
   [maurits]
 

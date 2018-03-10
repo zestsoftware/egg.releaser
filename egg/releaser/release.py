@@ -6,6 +6,7 @@ from zest.releaser import release
 from zest.releaser import utils
 
 import logging
+import os
 import sys
 
 
@@ -41,6 +42,20 @@ class Releaser(release.Releaser):
         self._release()
         logger.info('Switching to back to ' + current + ' branch.')
         self.vcs.gitflow_switch_to_branch(current)
+
+    def _upload_distributions(self, package):
+        super(Releaser, self)._upload_distributions(package)
+        # Support calling an extra script at this point.
+        # The script will be called with the tag checkout as working dir,
+        # and it will get 'dist/*' as argument.
+        script = os.environ.get('AFTER_UPLOAD_SCRIPT')
+        if not script:
+            return
+        cmd = [script, os.path.sep.join(['dist', '*'])]
+        print('Found this command for after upload: {}'.format(
+            utils.format_command(cmd)))
+        if utils.ask('Do you want to run this command?'):
+            print(utils.execute_command(cmd))
 
     def _gitflow_release_finish(self):
         if self.data['tag_already_exists']:
