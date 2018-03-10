@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.8 (unreleased)
-----------------
+2.0.0 (unreleased)
+------------------
 
 - Support calling an extra script after asking to upload to PyPI.
   The script will be called with the tag checkout as working dir,
