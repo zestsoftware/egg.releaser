@@ -21,7 +21,7 @@ class Git(OGGit):
 
     def cmd_gitflow_release_finish(self, version):
         return ['git', 'flow', 'release', 'finish', '-m',
-                '"Release-{}" {}'.format(version, version)]
+                'Release-{}'.format(version), version]
 
     def cmd_gitflow_hotfix_start(self, version, basename=''):
         return ['git', 'flow', 'hotfix', 'start', version, basename]
@@ -48,9 +48,8 @@ class Git(OGGit):
             return super(Git, self).cmd_create_tag(
                 version, message, sign=sign)
         msg = 'Release-{}'.format(version)
-        _start_cmd = 'git flow release start {} {}'.format(version, message)
-        _finish_cmd = 'git flow release finish -m "{}" {}'.format(
-            msg, version)
+        _start_cmd = self.cmd_gitflow_release_start(version, message)
+        _finish_cmd = self.cmd_gitflow_release_finish(msg, version)
         return [_start_cmd, _finish_cmd]
 
     def gitflow_branches(self):
