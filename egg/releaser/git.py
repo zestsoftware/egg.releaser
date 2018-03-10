@@ -98,7 +98,7 @@ class Git(OGGit):
         if not silent:
             logger.info(
                 'You are not on the "%s" branch, switching now.' % branch)
-        utils.execute_command(self.cmd_checkout_from_tag(branch, '.'))
+        utils.execute_commands(self.cmd_checkout_from_tag(branch, '.'))
 
     def current_branch(self):
         return utils.execute_command([

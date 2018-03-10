@@ -46,7 +46,7 @@ class Releaser(release.Releaser):
         if self.data['tag_already_exists']:
             return
         cmd = self.vcs.cmd_gitflow_release_finish(self.data['version'])
-        print(cmd)
+        print(utils.format_command(cmd))
         if utils.ask('Run this command'):
             print(utils.execute_command(cmd))
 
