@@ -4,6 +4,9 @@ Changelog
 1.8 (unreleased)
 ----------------
 
+- Cleanup and adapt code to work with latest zest.releaser (6.13.1 minimum).
+  [maurits]
+
 - Require zest.releaser 4.0 as minimum, for ``execute_comand``.  [maurits]
 
 
