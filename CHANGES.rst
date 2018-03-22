@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.0 (unreleased)
+2.0.0 (2018-03-22)
 ------------------
 
 - Support calling an extra script after asking to upload to PyPI.
