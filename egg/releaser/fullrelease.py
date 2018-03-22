@@ -1,13 +1,15 @@
+# -*- coding: utf-8 -*-
 """ Do the prerelease, actual release and post release in one fell swoop!
 """
+from __future__ import unicode_literals
+from zest.releaser import utils
 
 import logging
 import os
-
+import postrelease
 import prerelease
 import release
-import postrelease
-import utils
+
 
 logger = logging.getLogger(__name__)
 
@@ -32,4 +34,4 @@ def main():
     os.chdir(original_dir)
     logger.info('Finished full release.')
     if tagdir:
-        logger.info("Reminder: tag checkout is in %s", tagdir)
+        logger.info('Reminder: tag checkout is in %s', tagdir)

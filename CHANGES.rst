@@ -1,6 +1,24 @@
 Changelog
 =========
 
+2.0.0 (2018-03-22)
+------------------
+
+- Support calling an extra script after asking to upload to PyPI.
+  The script will be called with the tag checkout as working dir,
+  and it will get ``dist/*`` as argument.  We get the script from
+  the environment variable ``AFTER_UPLOAD_SCRIPT``.  You can avoid
+  calling this by not doing the tag checkout, or by having a
+  ``setup.cfg`` with ``[zest.releaser] release = no``.
+  Or simply answer 'No' when we ask if you want to run the command.
+  [maurits]
+
+- Cleanup and adapt code to work with latest zest.releaser (6.13.1 minimum).
+  [maurits]
+
+- Require zest.releaser 4.0 as minimum, for ``execute_comand``.  [maurits]
+
+
 1.7 (2016-07-13)
 ----------------
 
@@ -24,6 +42,7 @@ Changelog
 ----------------
 
 - 'feature/CMAAS-27':
+
   * Enhance original (OG) Git class instead of creating
     a new GitFlow
   * Have _push push to both develop and master branches
@@ -33,13 +52,16 @@ Changelog
     zest.releaser.choose as possible
   * Updated docstring formatting
   * Remove unused imports
+
   [THijs]
 
 - 'feature/CMAAS-26':
+
   * Handle system() changing to execute_command()
   * Only supply the entry points that override
     zest.releaser, the rest gets built by it's
     respective packages.
+
   [THijs]
 
 
